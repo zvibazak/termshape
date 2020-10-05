@@ -1,5 +1,6 @@
 # tremshape
-Python library for drawing basic shapes on terminal
+Tremshape is a minimalistic Python packgage, that only prints basic 
+shapes on terminal to the terminal. It does not have any dependencies.
 
 ## Usage
 
