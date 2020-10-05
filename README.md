@@ -36,7 +36,7 @@ print(get_square(5))
 * * * * *
 ```
 
-* Print a rectungle:
+* Print a rectangle:
 ```python
 from tremshape import get_rect
 print(get_rect(10,5))
