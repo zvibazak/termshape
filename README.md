@@ -1,4 +1,4 @@
-# tremshape
+# termshape
 Tremshape is a minimalistic Python packgage, that only prints basic 
 shapes on terminal. 
 It does not have any dependencies.
