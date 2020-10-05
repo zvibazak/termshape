@@ -8,7 +8,7 @@ setup(
   author = 'Zvi Bazak',
   author_email = 'zvibazak@gmail.com',
   url = 'https://github.com/zvibazak/termshape',
-  download_url = 'https://github.com/zvibazak/termshape/archive/v_0.0.1.tar.gz',
+  download_url = 'https://github.com/zvibazak/termshape/archive/v_0.0.2.tar.gz',
   keywords = ['terminal', 'shape'],
   install_requires=[],
   classifiers=[
