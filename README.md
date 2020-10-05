@@ -1,8 +1,7 @@
 # tremshape
 Python library for drawing basic shapes on terminal
 
-Usage
-#####
+## Usage
 
 Draw a rectungle::
 ```python
