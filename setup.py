@@ -8,12 +8,9 @@ setup(
   author = 'Zvi Bazak',
   author_email = 'zvibazak@gmail.com',
   url = 'https://github.com/zvibazak/termshape',
-  download_url = 'https://github.com/user/reponame/archive/v_01.tar.gz',    # I explain this later on
-  keywords = ['terminal', 'shape'],   # Keywords that define your package best
-  install_requires=[            # I get to this in a second
-          'validators',
-          'beautifulsoup4',
-      ],
+  download_url = 'https://github.com/zvibazak/termshape/archive/v_0.0.1.tar.gz',
+  keywords = ['terminal', 'shape'],
+  install_requires=[],
   classifiers=[
     'Development Status :: 3 - Alpha',
     'Intended Audience :: Developers',
