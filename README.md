@@ -7,6 +7,7 @@ Usage
 Draw a rectungle::
 
 .. code:: python
+
     print_rect(10,5)
 
     * * * * * * * * * *
