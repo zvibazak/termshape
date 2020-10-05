@@ -15,13 +15,8 @@ setup(
     'Development Status :: 3 - Alpha',
     'Intended Audience :: Developers',
     'Topic :: Software Development :: Build Tools',
-<<<<<<< HEAD
     'License :: OSI Approved :: MIT License',
     'Programming Language :: Python :: 3',
-=======
-    'License :: OSI Approved :: MIT License',   
-    'Programming Language :: Python :: 3',      
->>>>>>> d9f9aa8900d7041ede6abc4123664fae594908d0
     'Programming Language :: Python :: 3.4',
     'Programming Language :: Python :: 3.5',
     'Programming Language :: Python :: 3.6',
