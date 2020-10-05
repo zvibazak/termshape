@@ -2,7 +2,7 @@ from distutils.core import setup
 setup(
   name = 'termshape',         
   packages = ['termshape'],   
-  version = '0.0.1',      
+  version = '0.0.2',      
   license='MIT',
   description = 'Tremshape is a minimalistic Python packgage, that only prints basic shapes on terminal.',   
   author = 'Zvi Bazak',
