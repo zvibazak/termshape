@@ -3,6 +3,8 @@ Tremshape is a minimalistic Python packgage, that only prints basic
 shapes on terminal. 
 It does not have any dependencies.
 
+You're welcome to add any shapes!
+
 ### Explain:
 The print_* functions has (x,y) ranges, and some equations and print the lines.
 
