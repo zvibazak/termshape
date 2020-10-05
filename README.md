@@ -36,10 +36,10 @@ print_square(5)
 * * * * *
 ```
 
-* Print a rectungle:
+* Print a rectangle:
 ```python
 from tremshape import print_rect
-print_rect(10,5)
+print_rectangle(10,5)
 ```
 ```
 * * * * * * * * * *
@@ -78,10 +78,10 @@ print_circle(10)
                   * * * * *                
 ```
 
-* Print a triangle:
+* Print a triangular:
 ```python
 from tremshape import print_triangle
-print_triangle(10)
+print_triangular(10)
 ```
 ```
 *                  
