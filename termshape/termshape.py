@@ -10,7 +10,6 @@ __author__ = "zvibazak"
 __version__ = "place the new version here"
 __license__ = "MIT"
 
-
 DEFAULT_CHARACTER = '*'
 
 def plot(canvas):
