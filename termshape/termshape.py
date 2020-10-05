@@ -2,13 +2,12 @@ def plot(canvas):
     res = ''
     for row in [' '.join(row) for row in canvas]:
         res += row + '\n'
-    print(res)
     return res
 
-def make_shape(list_x,list_y, eqs,ch='*'):
+def make_shape(list_x, list_y, eqs, ch='*'):
     canvas = [[' ' for _ in list_x] for _ in list_y]
 
-    #calc for range with negative values
+    #calc min_x, min_y for range with negative values
     min_x = abs(min(list_x))
     min_y = abs(min(list_y))
     
@@ -23,23 +22,23 @@ def make_shape(list_x,list_y, eqs,ch='*'):
 
     return plot(canvas)
 
-def print_square(size,ch='*'):
+def get_square(size, ch='*'):
     x = y = range(size)
     eq = ["x==0", "x=="+str(size-1), "y==0", "y=="+str(size-1)]
     return make_shape(x,y,eq,ch)
     
-def print_rectangle(w,h,ch='*'):
+def get_rectangle(w,h,ch='*'):
     x = range(w)
     y = range(h)
     eq = ["x==0","x=="+str(w-1),"y==0","y=="+str(h-1)]
     return make_shape(x,y,eq,ch)
 
-def print_triangular(h,ch='*'):
+def get_triangular(h,ch='*'):
     x = y = range(h)
     eq = ["x==0","x=="+str(h)+"-y-1","y==0"]
     return make_shape(x,y,eq,ch)
 
-def print_circle(r,ch='*',t=0.05):
+def get_circle(r,ch='*',t=0.05):
     size=r+1
     x = y = range(-size,size)
 

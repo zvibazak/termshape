@@ -6,12 +6,12 @@ It does not have any dependencies.
 You're welcome to add any shapes!
 
 ### Explain:
-The print_* functions has (x,y) ranges, and some equations and print the lines.
+The print(get_* functions has (x,y) ranges, and some equations and print the lines.
 
 ### Example:
 ```python
-from tremshape import print_square
-print_square(5,5)
+from tremshape import get_square
+print(get_square(5,5))
 ```
 so: 
 `x-range` is between 0 and 4
@@ -25,8 +25,8 @@ See below the output.
 
 * Print a square:
 ```python
-from tremshape import print_square
-print_square(5)
+from tremshape import get_square
+print(get_square(5))
 ```
 ```
 * * * * *
@@ -38,8 +38,8 @@ print_square(5)
 
 * Print a rectungle:
 ```python
-from tremshape import print_rect
-print_rect(10,5)
+from tremshape import get_rect
+print(get_rect(10,5))
 ```
 ```
 * * * * * * * * * *
@@ -51,8 +51,8 @@ print_rect(10,5)
 
 * Print a circle:
 ```python
-from tremshape import print_circle
-print_circle(10)
+from tremshape import get_circle
+print(get_circle(10))
 ```
 ```
                   * * * * *                
@@ -80,8 +80,8 @@ print_circle(10)
 
 * Print a triangle:
 ```python
-from tremshape import print_triangle
-print_triangle(10)
+from tremshape import get_triangle
+print(get_triangle(10))
 ```
 ```
 *                  
