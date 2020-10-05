@@ -1,5 +1,5 @@
 # termshape
-Tremshape is a minimalistic Python packgage, that only prints basic 
+Termshape is a minimalistic Python packgage, that only prints basic 
 shapes on terminal. 
 It does not have any dependencies.
 
@@ -16,7 +16,7 @@ The print(get_* functions has (x,y) ranges, and some equations and print the lin
 
 ### Example:
 ```python
-from tremshape import get_square
+from termshape import get_square
 print(get_square(5,5))
 ```
 so: 
@@ -31,7 +31,7 @@ See below the output.
 
 * Print a square:
 ```python
-from tremshape import get_square
+from termshape import get_square
 print(get_square(5))
 ```
 ```
@@ -44,7 +44,7 @@ print(get_square(5))
 
 * Print a rectangle:
 ```python
-from tremshape import get_rectangle 
+from termshape import get_rectangle 
 print(get_rectangle(10,5))
 ```
 ```
@@ -57,7 +57,7 @@ print(get_rectangle(10,5))
 
 * Print a circle:
 ```python
-from tremshape import get_circle
+from termshape import get_circle
 print(get_circle(10))
 ```
 ```
@@ -86,7 +86,7 @@ print(get_circle(10))
 
 * Print a triangle:
 ```python
-from tremshape import get_triangle
+from termshape import get_triangle
 print(get_triangle(10))
 ```
 ```
