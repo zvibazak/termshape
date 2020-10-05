@@ -1,13 +1,36 @@
+# -*- coding: utf8 -*-
+
+"""Termshape
+
+Termshape is a minimalistic Python package, that only prints basic
+shapes on terminal. It does not have any dependencies.
+"""
+
+__author__ = "zvibazak"
+__version__ = "place the new version here"
+__license__ = "MIT"
+
+
+DEFAULT_CHARACTER = '*'
+
 def plot(canvas):
+    """Plots a 2d canvas, using `canvas` as a 2d array."""
+    
     res = ''
     for row in [' '.join(row) for row in canvas]:
         res += row + '\n'
     return res
 
-def make_shape(list_x, list_y, eqs, ch='*'):
+
+def make_shape(list_x, list_y, eqs, ch=DEFAULT_CHARACTER):
+    """Creates a shape using `list_x` and `list_y`, the current
+    character is only placed if one of the expressions in `eqs` is
+    true, `ch` is the character used to create the shape.
+    """
+    
     canvas = [[' ' for _ in list_x] for _ in list_y]
 
-    #calc min_x, min_y for range with negative values
+    # calc min_x, min_y for range with negative values
     min_x = abs(min(list_x))
     min_y = abs(min(list_y))
     
@@ -22,26 +45,60 @@ def make_shape(list_x, list_y, eqs, ch='*'):
 
     return plot(canvas)
 
-def get_square(size, ch='*'):
-    x = y = range(size)
-    eq = ["x==0", "x=="+str(size-1), "y==0", "y=="+str(size-1)]
-    return make_shape(x,y,eq,ch)
+
+def get_square(size, ch=DEFAULT_CHARACTER):
+    """Creates a square of `size`, using `ch` as the character to
+    creates the shape.
+    """
     
-def get_rectangle(w,h,ch='*'):
-    x = range(w)
-    y = range(h)
-    eq = ["x==0","x=="+str(w-1),"y==0","y=="+str(h-1)]
-    return make_shape(x,y,eq,ch)
+    return get_rectangle(size, size, ch)
+    
+    
+def get_rectangle(width, height, ch=DEFAULT_CHARACTER):
+    """Creates a rectangle of `width` and `height`, using `ch` as
+    the character to creates the shape.
+    """
+    
+    x = range(width)
+    y = range(height)
 
-def get_triangular(h,ch='*'):
-    x = y = range(h)
-    eq = ["x==0","x=="+str(h)+"-y-1","y==0"]
-    return make_shape(x,y,eq,ch)
+    eq = ["x==0",
+          "x=="+str(width-1),
+          "y==0",
+          "y=="+str(height-1)
+         ]
 
-def get_circle(r,ch='*',t=0.05):
-    size=r+1
-    x = y = range(-size,size)
+    return make_shape(x, y, eq, ch)
 
-    #TODO calc best t
-    eq = ["x**2+y**2>"+str(r**2-t*(r**2)) + " and x**2+y**2<"+str(r**2+t*(r**2))]
-    return make_shape(x,y,eq,ch)
+
+def get_triangular(height, ch=DEFAULT_CHARACTER):
+    """Creates a triangle of `height`, using `ch` as the character to
+    creates the shape.
+    """
+    
+    x = y = range(height)
+
+    eq = ["x==0",
+          "x=="+str(height)+"-y-1",
+          "y==0"
+         ]
+
+    return make_shape(x, y, eq, ch)
+
+
+def get_circle(radius, fpercent=0.05, ch=DEFAULT_CHARACTER):
+    """Creates a circle of `radius`, using a fill percentage
+    `fpercent`, using `ch` as the character to creates the shape.
+    """
+    
+    size = radius + 1
+    x = y = range(-size, size)
+
+    # TODO calc best t
+    eq = ["x**2 + y**2 >"
+          + str(radius**2 - fpercent*(radius**2))
+          + " and x**2 + y**2 <"
+          + str(radius**2 + fpercent*(radius**2))
+         ]
+
+    return make_shape(x, y, eq, ch)
