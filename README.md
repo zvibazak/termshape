@@ -1,3 +1,5 @@
+[![PyPI version fury.io](https://badge.fury.io/py/termshape.svg)](https://pypi.org/project/termshape/)
+
 # termshape
 Termshape is a minimalistic Python package, that only prints basic 
 shapes on terminal. 
