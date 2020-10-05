@@ -44,6 +44,32 @@ print_rect(10,5)
 * * * * * * * * * *
 ```
 
+* Print a circle:
+```python
+print_circle(10)
+```
+```
+                  * * * * *                
+              *               *            
+          *                       *        
+        *                           *      
+      *                               *    
+                                           
+    *                                   *  
+                                           
+  *                                       *
+  *                                       *
+  *                                       *
+  *                                       *
+  *                                       *
+                                           
+    *                                   *  
+                                           
+      *                               *    
+        *                           *      
+          *                       *        
+              *               *            
+                  * * * * *                
 
 * Print a triangle:
 ```python
