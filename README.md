@@ -38,8 +38,8 @@ print(get_square(5))
 
 * Print a rectangle:
 ```python
-from tremshape import get_rect
-print(get_rect(10,5))
+from tremshape import get_rectangle 
+print(get_rectangle(10,5))
 ```
 ```
 * * * * * * * * * *
