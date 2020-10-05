@@ -86,8 +86,8 @@ print(get_circle(10))
 
 * Print a triangle:
 ```python
-from termshape import get_triangle
-print(get_triangle(10))
+from termshape import get_triangular
+print(get_triangular(10))
 ```
 ```
 *                  
