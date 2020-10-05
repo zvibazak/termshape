@@ -1,5 +1,5 @@
 # termshape
-Termshape is a minimalistic Python packgage, that only prints basic 
+Termshape is a minimalistic Python package, that only prints basic 
 shapes on terminal. 
 It does not have any dependencies.
 
