@@ -12,7 +12,7 @@ pip install termshape
 ```
 
 ### Explain:
-The print(get_* functions has (x,y) ranges, and some equations and print the lines.
+The ```get_*``` functions has (x,y) ranges, and some equations and print the lines.
 
 ### Example:
 ```python
