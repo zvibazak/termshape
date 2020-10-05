@@ -1,10 +1,15 @@
 from distutils.core import setup
+
+with open("README.md", "r") as fh:
+    long_description = fh.read()
+    
 setup(
   name = 'termshape',         
   packages = ['termshape'],   
   version = '0.0.2',      
   license='MIT',
   description = 'Tremshape is a minimalistic Python packgage, that only prints basic shapes on terminal.',   
+  long_description = '',
   author = 'Zvi Bazak',
   author_email = 'zvibazak@gmail.com',
   url = 'https://github.com/zvibazak/termshape',
