@@ -5,6 +5,12 @@ It does not have any dependencies.
 
 You're welcome to add any shapes!
 
+## Installation 
+
+```
+pip install termshape
+```
+
 ### Explain:
 The print(get_* functions has (x,y) ranges, and some equations and print the lines.
 
