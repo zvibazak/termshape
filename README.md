@@ -101,3 +101,16 @@ print(get_triangular(10))
 *               *  
 * * * * * * * * * *
 ```
+
+* Print a shape with custom character:
+```python
+from termshape import get_rectangle
+print(get_rectangle(10,5,'$'))
+```
+```
+$ $ $ $ $ $ $ $ $ $
+$                 $
+$                 $
+$                 $
+$ $ $ $ $ $ $ $ $ $
+```
