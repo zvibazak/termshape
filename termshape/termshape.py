@@ -28,13 +28,13 @@ def print_square(size,ch='*'):
     eq = ["x==0", "x=="+str(size-1), "y==0", "y=="+str(size-1)]
     return make_shape(x,y,eq,ch)
     
-def print_rect(w,h,ch='*'):
+def print_rectangle(w,h,ch='*'):
     x = range(w)
     y = range(h)
     eq = ["x==0","x=="+str(w-1),"y==0","y=="+str(h-1)]
     return make_shape(x,y,eq,ch)
 
-def print_tring(h,ch='*'):
+def print_triangular(h,ch='*'):
     x = y = range(h)
     eq = ["x==0","x=="+str(h)+"-y-1","y==0"]
     return make_shape(x,y,eq,ch)
