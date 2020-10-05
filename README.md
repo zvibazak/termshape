@@ -5,11 +5,9 @@ Usage
 #####
 
 Draw a rectungle::
-
-.. code:: python
-
+```python
     print_rect(10,5)
-
+```
     * * * * * * * * * *
     *                 *
     *                 *
