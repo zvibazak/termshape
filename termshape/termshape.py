@@ -13,10 +13,14 @@ __license__ = "MIT"
 DEFAULT_CHARACTER = '*'
 DEFAULT_BGCHARACTER = ' '
 
-def plot(canvas, bgc=DEFAULT_BGCHARACTER):
-    """Plots a 2d canvas, using `canvas` as a 2d array, and `bgc` to
-    the background character.
-    """
+def validate_positive_params(*args):
+    for arg in args: 
+        if not isinstance(arg, int) or arg<=0:
+            return False
+    return True 
+
+def plot(canvas):
+    """Plots a 2d canvas, using `canvas` as a 2d array."""
     
     res = ''
     for row in [' '.join(row) for row in canvas]:
@@ -70,6 +74,9 @@ def get_rectangle(width, height, ch=DEFAULT_CHARACTER, bgc=DEFAULT_BGCHARACTER):
     foreground character and `bgc` as the background character.
     """
     
+    if not validate_positive_params(width, height):
+        raise TypeError("Only positive integers are allowed")
+
     x = range(width)
     y = range(height)
 
@@ -92,6 +99,9 @@ def get_triangular(height, ch=DEFAULT_CHARACTER, bgc=DEFAULT_BGCHARACTER):
     """Creates a triangle of `height`, using `ch` as the foreground
     character and `bgc` as the background character.
     """
+
+    if not validate_positive_params(height):
+        raise TypeError("Only positive integers are allowed")
     
     x = y = range(height)
 
@@ -104,13 +114,15 @@ def get_triangular(height, ch=DEFAULT_CHARACTER, bgc=DEFAULT_BGCHARACTER):
 
     return make_shape(x, y, feqs, beqs, ch, bgc)
 
-
 def get_circle(radius, fpercent=0.05, ch=DEFAULT_CHARACTER, bgc=DEFAULT_BGCHARACTER):
     """Creates a circle of `radius`, using a fill percentage
     `fpercent`, using `ch` as the foreground character and `bgc` as
     the background character.
     """
-    
+
+    if not validate_positive_params(radius):
+        raise TypeError("Only positive integers are allowed")
+
     size = radius + 1
     x = y = range(-size, size)
 
@@ -119,4 +131,3 @@ def get_circle(radius, fpercent=0.05, ch=DEFAULT_CHARACTER, bgc=DEFAULT_BGCHARAC
     beqs = [f"x**2 + y**2 < {radius**2 - fpercent * (radius**2)}"]
 
     return make_shape(x, y, feqs, beqs, ch, bgc)
-    
