@@ -11,6 +11,7 @@ __version__ = "0.0.2"
 __license__ = "MIT"
 
 DEFAULT_CHARACTER = '*'
+DEFAULT_BGCHARACTER = ' '
 
 def validate_positive_params(*args):
     for arg in args: 
@@ -27,10 +28,15 @@ def plot(canvas):
     return res
 
 
-def make_shape(list_x, list_y, eqs, ch=DEFAULT_CHARACTER):
+def make_shape(list_x, list_y, feqs, beqs, ch=DEFAULT_CHARACTER, bgc=DEFAULT_BGCHARACTER):
     """Creates a shape using `list_x` and `list_y`, the current
-    character is only placed if one of the expressions in `eqs` is
-    true, `ch` is the character used to create the shape.
+    character is only placed if ones of the expressions in `feqs` or
+    `beqs` is true, if the expression is in `feqs`, the foreground
+    character is placed, if the expression is in `beqs`, the background
+    character is used, `ch` is the foreground character, and `bgc` is
+    the background character.
+
+    The `beqs` expression list is evaluated first.
     """
     
     canvas = [[' ' for _ in list_x] for _ in list_y]
@@ -44,24 +50,28 @@ def make_shape(list_x, list_y, eqs, ch=DEFAULT_CHARACTER):
         for y in list_y:
             index_y = len(list_y) - (y+min_y) - 1
           
-            for eq in eqs:
+            for eq in beqs:
+                if eval(eq):
+                    canvas[index_y][index_x] = bgc
+
+            for eq in feqs:
                 if eval(eq):
                     canvas[index_y][index_x] = ch
 
     return plot(canvas)
 
 
-def get_square(size, ch=DEFAULT_CHARACTER):
-    """Creates a square of `size`, using `ch` as the character to
-    creates the shape.
+def get_square(size, ch=DEFAULT_CHARACTER, bgc=DEFAULT_BGCHARACTER):
+    """Creates a square of `size`, using `ch` as the foreground
+    character and `bgc` as the background character.
     """
     
-    return get_rectangle(size, size, ch)
+    return get_rectangle(size, size, ch, bgc)
     
     
-def get_rectangle(width, height, ch=DEFAULT_CHARACTER):
-    """Creates a rectangle of `width` and `height`, using `ch` as
-    the character to creates the shape.
+def get_rectangle(width, height, ch=DEFAULT_CHARACTER, bgc=DEFAULT_BGCHARACTER):
+    """Creates a rectangle of `width` and `height`, using `ch` as the
+    foreground character and `bgc` as the background character.
     """
     
     if not validate_positive_params(width, height):
@@ -70,18 +80,24 @@ def get_rectangle(width, height, ch=DEFAULT_CHARACTER):
     x = range(width)
     y = range(height)
 
-    eq = ["x==0",
-          "x=="+str(width-1),
-          "y==0",
-          "y=="+str(height-1)
-         ]
+    feqs = ["x==0",
+            f"x=={width-1}",
+            "y==0",
+            f"y=={height-1}"
+           ]
 
-    return make_shape(x, y, eq, ch)
+    beqs = ["x>0",
+            f"x<{width-1}",
+            "y>0",
+            f"y<{height-1}"
+           ]
+
+    return make_shape(x, y, feqs, beqs, ch, bgc)
 
 
-def get_triangular(height, ch=DEFAULT_CHARACTER):
-    """Creates a triangle of `height`, using `ch` as the character to
-    creates the shape.
+def get_triangular(height, ch=DEFAULT_CHARACTER, bgc=DEFAULT_BGCHARACTER):
+    """Creates a triangle of `height`, using `ch` as the foreground
+    character and `bgc` as the background character.
     """
 
     if not validate_positive_params(height):
@@ -89,16 +105,19 @@ def get_triangular(height, ch=DEFAULT_CHARACTER):
     
     x = y = range(height)
 
-    eq = ["x==0",
-          "x=="+str(height)+"-y-1",
-          "y==0"
-         ]
+    feqs = ["x==0",
+            f"x=={height}-y-1",
+            "y==0"
+           ]
 
-    return make_shape(x, y, eq, ch)
+    beqs = [f"x<{height}-y-1"]
 
-def get_circle(radius, fpercent=0.05, ch=DEFAULT_CHARACTER):
+    return make_shape(x, y, feqs, beqs, ch, bgc)
+
+def get_circle(radius, fpercent=0.05, ch=DEFAULT_CHARACTER, bgc=DEFAULT_BGCHARACTER):
     """Creates a circle of `radius`, using a fill percentage
-    `fpercent`, using `ch` as the character to creates the shape.
+    `fpercent`, using `ch` as the foreground character and `bgc` as
+    the background character.
     """
 
     if not validate_positive_params(radius):
@@ -107,11 +126,8 @@ def get_circle(radius, fpercent=0.05, ch=DEFAULT_CHARACTER):
     size = radius + 1
     x = y = range(-size, size)
 
-    # TODO calc best t
-    eq = ["x**2 + y**2 >"
-          + str(radius**2 - fpercent*(radius**2))
-          + " and x**2 + y**2 <"
-          + str(radius**2 + fpercent*(radius**2))
-         ]
+    feqs = [f"x**2 + y**2 > {radius**2 - fpercent * (radius**2)} and x**2 + y**2 < {radius**2 + fpercent * (radius**2)}"]
 
-    return make_shape(x, y, eq, ch)
+    beqs = [f"x**2 + y**2 < {radius**2 - fpercent * (radius**2)}"]
+
+    return make_shape(x, y, feqs, beqs, ch, bgc)
