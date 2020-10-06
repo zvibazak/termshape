@@ -58,7 +58,7 @@ def make_shape(list_x, list_y, feqs, beqs, ch=DEFAULT_CHARACTER, bgc=DEFAULT_BGC
                 if eval(eq):
                     canvas[index_y][index_x] = ch
 
-    return plot(canvas, bgc)
+    return plot(canvas)
 
 
 def get_square(size, ch=DEFAULT_CHARACTER, bgc=DEFAULT_BGCHARACTER):
