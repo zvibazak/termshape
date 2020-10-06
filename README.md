@@ -21,7 +21,7 @@ The ```get_*``` functions has (x,y) ranges, and some equations and print the lin
 ### Example:
 ```python
 from termshape import get_square
-print(get_square(5,5))
+print(get_square(5, 5))
 ```
 so: 
 `x-range` is between 0 and 4
@@ -49,7 +49,7 @@ print(get_square(5))
 * Print a rectangle:
 ```python
 from termshape import get_rectangle 
-print(get_rectangle(10,5))
+print(get_rectangle(10, 5))
 ```
 ```
 * * * * * * * * * *
@@ -109,7 +109,7 @@ print(get_triangular(10))
 * Print a shape with custom character:
 ```python
 from termshape import get_rectangle
-print(get_rectangle(10,5,'$'))
+print(get_rectangle(10, 5, fg='$'))
 ```
 ```
 $ $ $ $ $ $ $ $ $ $
@@ -122,7 +122,7 @@ $ $ $ $ $ $ $ $ $ $
 * Print a shape with background:
 ```python
 from termshape import get_rectangle
-print(get_square(10,bgc='.'))
+print(get_square(10, bg='.'))
 ```
 ```
 * * * * * * * * * *
@@ -136,3 +136,23 @@ print(get_square(10,bgc='.'))
 * . . . . . . . . *
 * * * * * * * * * *
 ```
+
+* Print a shape with points:
+```python
+from termshape import get_points
+points_array = [(0, 0), (0, 9), (9, 0), (9, 9)]
+print(get_points(10, 10, points_array, bg='.'))
+```
+```
+* . . . . . . . . *
+. . . . . . . . . .
+. . . . . . . . . .
+. . . . . . . . . .
+. . . . . . . . . .
+. . . . . . . . . .
+. . . . . . . . . .
+. . . . . . . . . .
+. . . . . . . . . .
+* . . . . . . . . *
+```
+
