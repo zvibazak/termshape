@@ -12,6 +12,12 @@ __license__ = "MIT"
 
 DEFAULT_CHARACTER = '*'
 
+def validate_positive_params(*args):
+    for arg in args: 
+        if not isinstance(arg, int) or arg<=0:
+            return False
+    return True 
+
 def plot(canvas):
     """Plots a 2d canvas, using `canvas` as a 2d array."""
     
@@ -58,6 +64,9 @@ def get_rectangle(width, height, ch=DEFAULT_CHARACTER):
     the character to creates the shape.
     """
     
+    if not validate_positive_params(width, height):
+        raise TypeError("Only positive integers are allowed")
+
     x = range(width)
     y = range(height)
 
@@ -74,6 +83,9 @@ def get_triangular(height, ch=DEFAULT_CHARACTER):
     """Creates a triangle of `height`, using `ch` as the character to
     creates the shape.
     """
+
+    if not validate_positive_params(height):
+        raise TypeError("Only positive integers are allowed")
     
     x = y = range(height)
 
@@ -84,12 +96,14 @@ def get_triangular(height, ch=DEFAULT_CHARACTER):
 
     return make_shape(x, y, eq, ch)
 
-
 def get_circle(radius, fpercent=0.05, ch=DEFAULT_CHARACTER):
     """Creates a circle of `radius`, using a fill percentage
     `fpercent`, using `ch` as the character to creates the shape.
     """
-    
+
+    if not validate_positive_params(radius):
+        raise TypeError("Only positive integers are allowed")
+
     size = radius + 1
     x = y = range(-size, size)
 
