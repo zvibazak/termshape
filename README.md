@@ -118,3 +118,21 @@ $                 $
 $                 $
 $ $ $ $ $ $ $ $ $ $
 ```
+
+* Print a shape with background:
+```python
+from termshape import get_rectangle
+print(get_square(10,bgc='.'))
+```
+```
+* * * * * * * * * *
+* . . . . . . . . *
+* . . . . . . . . *
+* . . . . . . . . *
+* . . . . . . . . *
+* . . . . . . . . *
+* . . . . . . . . *
+* . . . . . . . . *
+* . . . . . . . . *
+* * * * * * * * * *
+```
