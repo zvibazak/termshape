@@ -186,9 +186,9 @@ def get_circle(radius, fpercent=5, *, fg=DEFAULT_CHARACTER, bg=DEFAULT_BGCHARACT
         f"and x**2 + y**2 < {radius**2 + fpercent * (radius**2)}")
     }
 
-    beqs = [
+    beqs = {
         f"x**2 + y**2 < {radius**2 - fpercent * (radius**2)}"
-    ]
+    }
 
     return make_shape(x, y, feqs, beqs, fg=fg, bg=bg)
 
@@ -213,12 +213,12 @@ def get_points(width, height, points, *, fg=DEFAULT_CHARACTER, bg=DEFAULT_BGCHAR
     x = range(width)
     y = range(height)
 
-    feqs = [
+    feqs = {
         f"(x, y) in {points}"
-    ]
+    }
 
-    beqs = [
+    beqs = {
         f"(x, y) not in {points}"
-    ]
+    }
 
     return make_shape(x, y, feqs, beqs, fg=fg, bg=bg)
