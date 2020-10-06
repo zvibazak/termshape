@@ -64,7 +64,7 @@ def test_get_triangular():
 """)
 
 def test_get_rectangle_special_character():
-	string = get_rectangle(10, 5, bg='$')
+	string = get_rectangle(10, 5, fg='$')
 	assert (string == """\
 $ $ $ $ $ $ $ $ $ $
 $                 $
