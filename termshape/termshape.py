@@ -7,7 +7,7 @@ shapes on terminal. It does not have any dependencies.
 """
 
 __author__  = "zvibazak"
-__version__ = "PLACE VERSION HERE"
+__version__ = "1.0.0"
 __license__ = "MIT"
 
 DEFAULT_CHARACTER = '*'
