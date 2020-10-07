@@ -226,6 +226,9 @@ def get_points(width, height, points, *, fg=DEFAULT_CHARACTER, bg=DEFAULT_BGCHAR
 def get_number(number, size, *, fg=DEFAULT_CHARACTER, bg=DEFAULT_BGCHARACTER):
     _validate_positive_params(number+1,size)
 
+    if (number>9):
+        raise NotImplementedError
+
     width = int(size+1)
     height = int(size*2+1)
 
