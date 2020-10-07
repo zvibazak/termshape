@@ -258,7 +258,3 @@ def get_number(number, size, *, fg=DEFAULT_CHARACTER, bg=DEFAULT_BGCHARACTER):
 
     feqs = numbers[number]
     return make_shape(x, y, feqs, [], fg=fg, bg=bg)
-
-for i in range(10):
-    print(get_number(i,2))
-    print("\n\n")
