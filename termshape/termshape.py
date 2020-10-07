@@ -6,21 +6,25 @@ Termshape is a minimalistic Python package, that only prints basic
 shapes on terminal. It does not have any dependencies.
 """
 
-__author__ = "zvibazak"
+__author__  = "zvibazak"
 __version__ = "1.0.0"
 __license__ = "MIT"
 
 DEFAULT_CHARACTER = '*'
 DEFAULT_BGCHARACTER = ' '
 
-def validate_positive_params(*args):
+def _validate_positive_params(*args):
     for arg in args: 
-        if not isinstance(arg, int) or arg<=0:
-            return False
-    return True 
+        if not isinstance(arg, int) or arg <= 0:
+            raise TypeError("Only positive integers are allowed")
+
 
 def plot(canvas):
-    """Plots a 2d canvas, using `canvas` as a 2d array."""
+    """Plots a 2d canvas.
+    
+    Positional arguments:
+        canvas - 2d array for the canvas.
+    """
     
     res = ''
     for row in [' '.join(row) for row in canvas]:
@@ -28,15 +32,29 @@ def plot(canvas):
     return res
 
 
-def make_shape(list_x, list_y, feqs, beqs, ch=DEFAULT_CHARACTER, bgc=DEFAULT_BGCHARACTER):
-    """Creates a shape using `list_x` and `list_y`, the current
-    character is only placed if ones of the expressions in `feqs` or
-    `beqs` is true, if the expression is in `feqs`, the foreground
-    character is placed, if the expression is in `beqs`, the background
-    character is used, `ch` is the foreground character, and `bgc` is
-    the background character.
+def make_shape(list_x, list_y, feqs, beqs, *, fg=DEFAULT_CHARACTER, bg=DEFAULT_BGCHARACTER):
+    """Creates a shape using expressions lists for foreground character-
+    s and background characters.
+    
+    Positional arguments:
+        list_x - array for x coordinates.
+        list_y - array for y coordinates.
+        feqs   - list of expressions for foreground characters.
+        beqs   - list of expressions for background characters.
 
-    The `beqs` expression list is evaluated first.
+    Keyword arguments:
+        fg - foreground character.
+        bg - background character.
+
+    Expressions lists:
+        For each character, the expressions list of background charact-
+        ers is evaluated, if ones results in true, the background char-
+        acter is placed in the current position, the same thing for fo-
+        reground characters, except that is placed the foreground char-
+        acter.
+
+        An expression can use the variables 'x' and 'y' for the current
+        position.
     """
     
     canvas = [[' ' for _ in list_x] for _ in list_y]
@@ -46,88 +64,161 @@ def make_shape(list_x, list_y, feqs, beqs, ch=DEFAULT_CHARACTER, bgc=DEFAULT_BGC
     min_y = abs(min(list_y))
     
     for x in list_x:
-        index_x = x+min_x
+        index_x = x + min_x
         for y in list_y:
-            index_y = len(list_y) - (y+min_y) - 1
+            index_y = len(list_y) - (y + min_y) - 1
           
             for eq in beqs:
                 if eval(eq):
-                    canvas[index_y][index_x] = bgc
+                    canvas[index_y][index_x] = bg
 
             for eq in feqs:
                 if eval(eq):
-                    canvas[index_y][index_x] = ch
+                    canvas[index_y][index_x] = fg
 
     return plot(canvas)
 
 
-def get_square(size, ch=DEFAULT_CHARACTER, bgc=DEFAULT_BGCHARACTER):
-    """Creates a square of `size`, using `ch` as the foreground
-    character and `bgc` as the background character.
+def get_square(size, *, fg=DEFAULT_CHARACTER, bg=DEFAULT_BGCHARACTER):
+    """Creates a square.
+
+    Positional arguments:
+        size - size of the square.
+
+    Keyword arguments:
+        fg - foreground character.
+        bg - background character.
     """
     
-    return get_rectangle(size, size, ch, bgc)
+    return get_rectangle(size, size, fg=fg, bg=bg)
     
     
-def get_rectangle(width, height, ch=DEFAULT_CHARACTER, bgc=DEFAULT_BGCHARACTER):
-    """Creates a rectangle of `width` and `height`, using `ch` as the
-    foreground character and `bgc` as the background character.
+def get_rectangle(width, height, *, fg=DEFAULT_CHARACTER, bg=DEFAULT_BGCHARACTER):
+    """Creates a rectangle.
+
+    Positional arguments:
+        width  - width of the rectangle.
+        height - height of the rectangle.
+
+    Keyword arguments:
+        fg - foreground character.
+        bg - background character.
     """
     
-    if not validate_positive_params(width, height):
-        raise TypeError("Only positive integers are allowed")
+    _validate_positive_params(width, height)
+
+    width = int(width)
+    height = int(height)
 
     x = range(width)
     y = range(height)
 
-    feqs = ["x==0",
-            f"x=={width-1}",
-            "y==0",
-            f"y=={height-1}"
-           ]
+    feqs = {
+        "x == 0",
+        f"x == {width-1}",
+        "y == 0",
+        f"y == {height-1}"
+    }
 
-    beqs = ["x>0",
-            f"x<{width-1}",
-            "y>0",
-            f"y<{height-1}"
-           ]
+    beqs = {
+        "x > 0",
+        f"x < {width-1}",
+        "y > 0",
+        f"y < {height-1}"
+    }
 
-    return make_shape(x, y, feqs, beqs, ch, bgc)
+    return make_shape(x, y, feqs, beqs, fg=fg, bg=bg)
 
 
-def get_triangular(height, ch=DEFAULT_CHARACTER, bgc=DEFAULT_BGCHARACTER):
-    """Creates a triangle of `height`, using `ch` as the foreground
-    character and `bgc` as the background character.
+def get_triangular(height, *, fg=DEFAULT_CHARACTER, bg=DEFAULT_BGCHARACTER):
+    """Creates a triangle.
+
+    Positional arguments:
+        height - height of the triangle.
+
+    Keyword arguments:
+        fg - foreground character.
+        bg - background character.
     """
 
-    if not validate_positive_params(height):
-        raise TypeError("Only positive integers are allowed")
+    _validate_positive_params(height)
     
+    height = int(height)
+
     x = y = range(height)
 
-    feqs = ["x==0",
-            f"x=={height}-y-1",
-            "y==0"
-           ]
+    feqs = {
+        "x == 0",
+        f"x == {height}-y-1",
+        "y == 0"
+    }
 
-    beqs = [f"x<{height}-y-1"]
+    beqs = {
+        f"x < {height}-y-1"
+    }
 
-    return make_shape(x, y, feqs, beqs, ch, bgc)
+    return make_shape(x, y, feqs, beqs, fg=fg, bg=bg)
 
-def get_circle(radius, fpercent=0.05, ch=DEFAULT_CHARACTER, bgc=DEFAULT_BGCHARACTER):
-    """Creates a circle of `radius`, using a fill percentage
-    `fpercent`, using `ch` as the foreground character and `bgc` as
-    the background character.
+
+def get_circle(radius, fpercent=5, *, fg=DEFAULT_CHARACTER, bg=DEFAULT_BGCHARACTER):
+    """Creates a circle.
+
+    Positional arguments:
+        radius - radius of the circle.
+
+    Keyword arguments:
+        fpercent - fill percentage of the circle.
+        fg       - foreground character.
+        bg       - background character.
     """
 
-    if not validate_positive_params(radius):
-        raise TypeError("Only positive integers are allowed")
+    _validate_positive_params(radius, fpercent)
 
+    radius = int(radius)
+    fpercent = int(fpercent)
+
+    fpercent /= 100
     size = radius + 1
     x = y = range(-size, size)
 
-    feqs = [f"x**2 + y**2 > {radius**2 - fpercent * (radius**2)} and x**2 + y**2 < {radius**2 + fpercent * (radius**2)}"]
+    feqs = {
+        (f"x**2 + y**2 > {radius**2 - fpercent * (radius**2)}"
+        f"and x**2 + y**2 < {radius**2 + fpercent * (radius**2)}")
+    }
 
-    beqs = [f"x**2 + y**2 < {radius**2 - fpercent * (radius**2)}"]
+    beqs = {
+        f"x**2 + y**2 < {radius**2 - fpercent * (radius**2)}"
+    }
 
-    return make_shape(x, y, feqs, beqs, ch, bgc)
+    return make_shape(x, y, feqs, beqs, fg=fg, bg=bg)
+
+
+def get_points(width, height, points, *, fg=DEFAULT_CHARACTER, bg=DEFAULT_BGCHARACTER):
+    """Creates a shape of points.
+
+    Positional arguments:
+        width  - width of the shape.
+        height - height of the shape.
+        points - array of points, each point a tuple (x, y).
+
+    Keyword arguments:
+        fg - foreground character.
+        bg - background character.
+    """
+
+    _validate_positive_params(width, height)
+
+    points = list(points)
+
+    x = range(width)
+    y = range(height)
+
+    feqs = {
+        f"(x, y) in {points}"
+    }
+
+    beqs = {
+        f"(x, y) not in {points}"
+    }
+
+    return make_shape(x, y, feqs, beqs, fg=fg, bg=bg)
