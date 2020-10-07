@@ -222,3 +222,43 @@ def get_points(width, height, points, *, fg=DEFAULT_CHARACTER, bg=DEFAULT_BGCHAR
     }
 
     return make_shape(x, y, feqs, beqs, fg=fg, bg=bg)
+
+def get_number(number, size, *, fg=DEFAULT_CHARACTER, bg=DEFAULT_BGCHARACTER):
+    _validate_positive_params(number+1,size)
+
+    width = int(size+1)
+    height = int(size*2+1)
+
+    x = range(width)
+    y = range(height)
+
+    #https://en.wikipedia.org/wiki/Seven-segment_display
+    lines = [
+        f"y == {size*2} and x<={size}", #A
+        f"x == {size} and y>{size} and y<={size*2}", #B
+        f"x == {size} and y<={size}", #C
+        f"y == 0 and x<={size}", #D
+        f"x == 0 and y<={size}", #E
+        f"x == 0 and y>{size} and y<={size*2}", #F
+        f"y == {size} and x<={size}", #G
+    ]
+
+    numbers = [
+        {lines[0],lines[1],lines[2],lines[3],lines[4],lines[5]}, #0
+        {lines[1],lines[2]},#1
+        {lines[0],lines[1],lines[3],lines[4],lines[6]},#2
+        {lines[0],lines[1],lines[2],lines[3],lines[6]},#3
+        {lines[1],lines[2],lines[5],lines[6]},#4
+        {lines[0],lines[2],lines[3],lines[5],lines[6]},#5
+        {lines[0],lines[2],lines[3],lines[4],lines[5],lines[6]},#6
+        {lines[0],lines[1],lines[2]},#7
+        {lines[0],lines[1],lines[2],lines[3],lines[4],lines[5],lines[6]},#8
+        {lines[0],lines[1],lines[2],lines[3],lines[5],lines[6]},#9
+    ]
+
+    feqs = numbers[number]
+    return make_shape(x, y, feqs, [], fg=fg, bg=bg)
+
+for i in range(10):
+    print(get_number(i,2))
+    print("\n\n")

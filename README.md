@@ -156,3 +156,21 @@ print(get_points(10, 10, points_array, bg='.'))
 * . . . . . . . . *
 ```
 
+
+* Print numbers:
+```python
+from termshape import get_numbers
+print(get_numbers(2, 2))
+```
+```
+* * *
+
+    *
+
+* * *
+
+*
+
+* * *
+```
+ 
