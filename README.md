@@ -172,3 +172,22 @@ print(get_numbers(31415926,3))
       *          *          *          *          *          *    *          *     *
 * * * *          *          *          *    * * * *    * * * *    * * * *    * * * *
 ```
+
+* Print a custom shape using lines:
+```python
+from termshape import get_lines
+lines = [(0, 0), (9, 9), (0, 9), (9, 0), (0, 0)]
+print(get_lines(10, 10, lines))
+```
+```
+* * * * * * * * * *
+  *             *  
+    *         *    
+      *     *      
+        * *        
+        * *        
+      *     *      
+    *         *    
+  *             *  
+* * * * * * * * * *
+```
