@@ -88,6 +88,26 @@ def test_get_rectangle_background():
 * * * * * * * * * *
 """)
 
+def test_type_error():
+	with pytest.raises(TypeError):
+		get_square("koko")
+
+def test_get_points():
+	points_array = [(0, 0), (0, 9), (9, 0), (9, 9)]
+	string = get_points(10, 10, points_array, bg='.')
+	assert(string == """\
+* . . . . . . . . *
+. . . . . . . . . .
+. . . . . . . . . .
+. . . . . . . . . .
+. . . . . . . . . .
+. . . . . . . . . .
+. . . . . . . . . .
+. . . . . . . . . .
+. . . . . . . . . .
+* . . . . . . . . *
+""")
+
 def test_get_numbers():
 	string0 = get_number(0,2)
 	assert (string0 == """\
