@@ -223,12 +223,12 @@ def get_points(width, height, points, *, fg=DEFAULT_CHARACTER, bg=DEFAULT_BGCHAR
 
     return make_shape(x, y, feqs, beqs, fg=fg, bg=bg)
 
-def get_number(number, size, *, fg=DEFAULT_CHARACTER):
+def get_numbers(number, size, *, fg=DEFAULT_CHARACTER):
     """Creates a shape of numbers.
 
     Positional arguments:
         number - number to print.
-        size - size of the shape.
+        size   - size of the shape.
         
     Keyword arguments:
         fg - foreground character.
