@@ -223,11 +223,18 @@ def get_points(width, height, points, *, fg=DEFAULT_CHARACTER, bg=DEFAULT_BGCHAR
 
     return make_shape(x, y, feqs, beqs, fg=fg, bg=bg)
 
-def get_number(number, size, *, fg=DEFAULT_CHARACTER, bg=DEFAULT_BGCHARACTER):
-    _validate_positive_params(number+1,size)
+def get_number(number, size, *, fg=DEFAULT_CHARACTER):
+    """Creates a shape of numbers.
 
-    if (number>9):
-        raise NotImplementedError
+    Positional arguments:
+        number - number to print.
+        size - size of the shape.
+        
+    Keyword arguments:
+        fg - foreground character.
+    """
+
+    _validate_positive_params(number+1,size)
 
     width = int(size+1)
     height = int(size*2+1)
@@ -236,7 +243,7 @@ def get_number(number, size, *, fg=DEFAULT_CHARACTER, bg=DEFAULT_BGCHARACTER):
     y = range(height)
 
     #https://en.wikipedia.org/wiki/Seven-segment_display
-    lines = [
+    l = [
         f"y == {size*2} and x<={size}", #A
         f"x == {size} and y>{size} and y<={size*2}", #B
         f"x == {size} and y<={size}", #C
@@ -247,17 +254,31 @@ def get_number(number, size, *, fg=DEFAULT_CHARACTER, bg=DEFAULT_BGCHARACTER):
     ]
 
     numbers = [
-        {lines[0],lines[1],lines[2],lines[3],lines[4],lines[5]}, #0
-        {lines[1],lines[2]},#1
-        {lines[0],lines[1],lines[3],lines[4],lines[6]},#2
-        {lines[0],lines[1],lines[2],lines[3],lines[6]},#3
-        {lines[1],lines[2],lines[5],lines[6]},#4
-        {lines[0],lines[2],lines[3],lines[5],lines[6]},#5
-        {lines[0],lines[2],lines[3],lines[4],lines[5],lines[6]},#6
-        {lines[0],lines[1],lines[2]},#7
-        {lines[0],lines[1],lines[2],lines[3],lines[4],lines[5],lines[6]},#8
-        {lines[0],lines[1],lines[2],lines[3],lines[5],lines[6]},#9
+        {l[0],l[1],l[2],l[3],l[4],l[5]     }, #0
+        {     l[1],l[2]                    }, #1
+        {l[0],l[1],     l[3],l[4],     l[6]}, #2
+        {l[0],l[1],l[2],l[3],          l[6]}, #3
+        {     l[1],l[2],          l[5],l[6]}, #4
+        {l[0],     l[2],l[3],     l[5],l[6]}, #5
+        {l[0],     l[2],l[3],l[4],l[5],l[6]}, #6
+        {l[0],l[1],l[2]                    }, #7
+        {l[0],l[1],l[2],l[3],l[4],l[5],l[6]}, #8
+        {l[0],l[1],l[2],l[3],     l[5],l[6]}, #9
     ]
 
-    feqs = numbers[number]
-    return make_shape(x, y, feqs, [], fg=fg, bg=bg)
+    res = ""
+
+    for digit in str(number): 
+        feqs = numbers[int(digit)]
+        
+        s_digit = make_shape(x, y, feqs, [], fg=fg)
+        if res:
+            new_res = ""
+            for i,j in zip(res.split("\n"),s_digit.split("\n")):
+                if i and j:
+                    new_res += i+"    "+j+'\n'
+            res=new_res
+        else:
+            res = s_digit
+
+    return res

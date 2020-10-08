@@ -179,8 +179,13 @@ def test_get_numbers():
 * * *
 """)
 
-	try:
-		string10 = get_number(10,2)
-		assert (string10 == "")
-	except NotImplementedError:
-		pass
+	stringPI = get_number(31415926,3)
+	assert (stringPI == """\
+* * * *          *    *     *          *    * * * *    * * * *    * * * *    * * * *
+      *          *    *     *          *    *          *     *          *    *      
+      *          *    *     *          *    *          *     *          *    *      
+* * * *          *    * * * *          *    * * * *    * * * *    * * * *    * * * *
+      *          *          *          *          *          *    *          *     *
+      *          *          *          *          *          *    *          *     *
+* * * *          *          *          *    * * * *    * * * *    * * * *    * * * *
+""")
