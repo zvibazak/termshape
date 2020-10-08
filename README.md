@@ -15,8 +15,10 @@ You're welcome to add any shapes!
 pip install termshape
 ```
 
-### Explain:
-The ```get_*``` functions has (x,y) ranges, and some equations and print the lines.
+### Explanation:
+The idea is to draw all the shapes as verctors, so you can set the size of any shape as you wish.
+Each shape has equations that print it.
+The ```get_*``` functions has (x,y) range and some equations, and from them it prints the shape.
 
 ### Example:
 ```python
