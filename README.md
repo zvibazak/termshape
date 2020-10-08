@@ -1,5 +1,5 @@
 [![PyPI version fury.io](https://badge.fury.io/py/termshape.svg)](https://pypi.org/project/termshape/)
-[![codecov](https://codecov.io/gh/zvibazak/termshape/branch/main/graph/badge.svg?token=PD5B5XX108)](undefined)
+[![codecov](https://codecov.io/gh/zvibazak/termshape/branch/main/graph/badge.svg)](https://codecov.io/gh/zvibazak/termshape)
 ![Tests](https://github.com/zvibazak/termshape/workflows/Python%20application/badge.svg)
 
 # termshape
