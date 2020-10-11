@@ -1,5 +1,5 @@
 [![PyPI version fury.io](https://badge.fury.io/py/termshape.svg)](https://pypi.org/project/termshape/)
-[![codecov](https://codecov.io/gh/zvibazak/termshape/branch/main/graph/badge.svg?token=PD5B5XX108)](undefined)
+[![codecov](https://codecov.io/gh/zvibazak/termshape/branch/main/graph/badge.svg)](https://codecov.io/gh/zvibazak/termshape)
 ![Tests](https://github.com/zvibazak/termshape/workflows/Python%20application/badge.svg)
 
 # termshape
@@ -15,8 +15,10 @@ You're welcome to add any shapes!
 pip install termshape
 ```
 
-### Explain:
-The ```get_*``` functions has (x,y) ranges, and some equations and print the lines.
+### Explanation:
+The idea is to draw all the shapes as vectors, so you can set the size of any shape as you wish.
+Each shape has equations that print it.
+The ```get_*``` functions has (x,y) range and some equations, and from them it prints the shape.
 
 ### Example:
 ```python
@@ -169,4 +171,23 @@ print(get_numbers(31415926,3))
       *          *          *          *          *          *    *          *     *
       *          *          *          *          *          *    *          *     *
 * * * *          *          *          *    * * * *    * * * *    * * * *    * * * *
+```
+
+* Print a custom shape using lines:
+```python
+from termshape import get_lines
+lines = [(0, 0), (9, 9), (0, 9), (9, 0), (0, 0)]
+print(get_lines(10, 10, lines))
+```
+```
+* * * * * * * * * *
+  *             *  
+    *         *    
+      *     *      
+        * *        
+        * *        
+      *     *      
+    *         *    
+  *             *  
+* * * * * * * * * *
 ```

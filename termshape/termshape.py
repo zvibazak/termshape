@@ -10,10 +10,12 @@ __author__  = "zvibazak"
 __version__ = "1.1.0" 
 __license__ = "MIT"
 
-DEFAULT_CHARACTER = '*'
+DEFAULT_FGCHARACTER = '*'
 DEFAULT_BGCHARACTER = ' '
 
 def _validate_positive_params(*args):
+    # Raises TypeError if ones arguments in args is not an integer.
+
     for arg in args: 
         if not isinstance(arg, int) or arg <= 0:
             raise TypeError("Only positive integers are allowed")
@@ -32,7 +34,7 @@ def plot(canvas):
     return res
 
 
-def make_shape(list_x, list_y, feqs, beqs, *, fg=DEFAULT_CHARACTER, bg=DEFAULT_BGCHARACTER):
+def make_shape(list_x, list_y, feqs, beqs, *, fg=DEFAULT_FGCHARACTER, bg=DEFAULT_BGCHARACTER):
     """Creates a shape using expressions lists for foreground character-
     s and background characters.
     
@@ -79,7 +81,7 @@ def make_shape(list_x, list_y, feqs, beqs, *, fg=DEFAULT_CHARACTER, bg=DEFAULT_B
     return plot(canvas)
 
 
-def get_square(size, *, fg=DEFAULT_CHARACTER, bg=DEFAULT_BGCHARACTER):
+def get_square(size, *, fg=DEFAULT_FGCHARACTER, bg=DEFAULT_BGCHARACTER):
     """Creates a square.
 
     Positional arguments:
@@ -93,7 +95,7 @@ def get_square(size, *, fg=DEFAULT_CHARACTER, bg=DEFAULT_BGCHARACTER):
     return get_rectangle(size, size, fg=fg, bg=bg)
     
     
-def get_rectangle(width, height, *, fg=DEFAULT_CHARACTER, bg=DEFAULT_BGCHARACTER):
+def get_rectangle(width, height, *, fg=DEFAULT_FGCHARACTER, bg=DEFAULT_BGCHARACTER):
     """Creates a rectangle.
 
     Positional arguments:
@@ -113,24 +115,24 @@ def get_rectangle(width, height, *, fg=DEFAULT_CHARACTER, bg=DEFAULT_BGCHARACTER
     x = range(width)
     y = range(height)
 
-    feqs = {
+    feqs = [
         "x == 0",
         f"x == {width-1}",
         "y == 0",
-        f"y == {height-1}"
-    }
+        f"y == {height-1}",
+    ]
 
-    beqs = {
+    beqs = [
         "x > 0",
         f"x < {width-1}",
         "y > 0",
-        f"y < {height-1}"
-    }
+        f"y < {height-1}",
+    ]
 
     return make_shape(x, y, feqs, beqs, fg=fg, bg=bg)
 
 
-def get_triangular(height, *, fg=DEFAULT_CHARACTER, bg=DEFAULT_BGCHARACTER):
+def get_triangular(height, *, fg=DEFAULT_FGCHARACTER, bg=DEFAULT_BGCHARACTER):
     """Creates a triangle.
 
     Positional arguments:
@@ -147,20 +149,20 @@ def get_triangular(height, *, fg=DEFAULT_CHARACTER, bg=DEFAULT_BGCHARACTER):
 
     x = y = range(height)
 
-    feqs = {
+    feqs = [
         "x == 0",
         f"x == {height}-y-1",
         "y == 0"
-    }
+    ]
 
-    beqs = {
-        f"x < {height}-y-1"
-    }
+    beqs = [
+        f"x < {height}-y-1",
+    ]
 
     return make_shape(x, y, feqs, beqs, fg=fg, bg=bg)
 
 
-def get_circle(radius, fpercent=5, *, fg=DEFAULT_CHARACTER, bg=DEFAULT_BGCHARACTER):
+def get_circle(radius, fpercent=5, *, fg=DEFAULT_FGCHARACTER, bg=DEFAULT_BGCHARACTER):
     """Creates a circle.
 
     Positional arguments:
@@ -181,19 +183,19 @@ def get_circle(radius, fpercent=5, *, fg=DEFAULT_CHARACTER, bg=DEFAULT_BGCHARACT
     size = radius + 1
     x = y = range(-size, size)
 
-    feqs = {
+    feqs = [
         (f"x**2 + y**2 > {radius**2 - fpercent * (radius**2)}"
         f"and x**2 + y**2 < {radius**2 + fpercent * (radius**2)}")
-    }
+    ]
 
-    beqs = {
+    beqs = [
         f"x**2 + y**2 < {radius**2 - fpercent * (radius**2)}"
-    }
+    ]
 
     return make_shape(x, y, feqs, beqs, fg=fg, bg=bg)
 
 
-def get_points(width, height, points, *, fg=DEFAULT_CHARACTER, bg=DEFAULT_BGCHARACTER):
+def get_points(width, height, points, *, fg=DEFAULT_FGCHARACTER, bg=DEFAULT_BGCHARACTER):
     """Creates a shape of points.
 
     Positional arguments:
@@ -213,25 +215,27 @@ def get_points(width, height, points, *, fg=DEFAULT_CHARACTER, bg=DEFAULT_BGCHAR
     x = range(width)
     y = range(height)
 
-    feqs = {
+    feqs = [
         f"(x, y) in {points}"
-    }
+    ]
 
-    beqs = {
+    beqs = [
         f"(x, y) not in {points}"
-    }
+    ]
 
     return make_shape(x, y, feqs, beqs, fg=fg, bg=bg)
 
-def get_number(number, size, *, fg=DEFAULT_CHARACTER):
+
+def get_numbers(number, size, *, fg=DEFAULT_FGCHARACTER, bg=DEFAULT_BGCHARACTER):
     """Creates a shape of numbers.
 
     Positional arguments:
         number - number to print.
-        size - size of the shape.
+        size   - size of the shape.
         
     Keyword arguments:
         fg - foreground character.
+        bg - background character.
     """
 
     _validate_positive_params(number+1,size)
@@ -242,28 +246,28 @@ def get_number(number, size, *, fg=DEFAULT_CHARACTER):
     x = range(width)
     y = range(height)
 
-    #https://en.wikipedia.org/wiki/Seven-segment_display
+    # https://en.wikipedia.org/wiki/Seven-segment_display
     l = [
-        f"y == {size*2} and x<={size}", #A
-        f"x == {size} and y>{size} and y<={size*2}", #B
-        f"x == {size} and y<={size}", #C
-        f"y == 0 and x<={size}", #D
-        f"x == 0 and y<={size}", #E
-        f"x == 0 and y>{size} and y<={size*2}", #F
-        f"y == {size} and x<={size}", #G
+        f"y == {size*2} and x<={size}",               # A
+        f"x == {size} and y>{size} and y<={size*2}",  # B
+        f"x == {size} and y<={size}",                 # C
+        f"y == 0 and x<={size}",                      # D
+        f"x == 0 and y<={size}",                      # E
+        f"x == 0 and y>{size} and y<={size*2}",       # F
+        f"y == {size} and x<={size}",                 # G
     ]
 
     numbers = [
-        {l[0],l[1],l[2],l[3],l[4],l[5]     }, #0
-        {     l[1],l[2]                    }, #1
-        {l[0],l[1],     l[3],l[4],     l[6]}, #2
-        {l[0],l[1],l[2],l[3],          l[6]}, #3
-        {     l[1],l[2],          l[5],l[6]}, #4
-        {l[0],     l[2],l[3],     l[5],l[6]}, #5
-        {l[0],     l[2],l[3],l[4],l[5],l[6]}, #6
-        {l[0],l[1],l[2]                    }, #7
-        {l[0],l[1],l[2],l[3],l[4],l[5],l[6]}, #8
-        {l[0],l[1],l[2],l[3],     l[5],l[6]}, #9
+        {l[0],l[1],l[2],l[3],l[4],l[5]     },  # 0
+        {     l[1],l[2]                    },  # 1
+        {l[0],l[1],     l[3],l[4],     l[6]},  # 2
+        {l[0],l[1],l[2],l[3],          l[6]},  # 3
+        {     l[1],l[2],          l[5],l[6]},  # 4
+        {l[0],     l[2],l[3],     l[5],l[6]},  # 5
+        {l[0],     l[2],l[3],l[4],l[5],l[6]},  # 6
+        {l[0],l[1],l[2]                    },  # 7
+        {l[0],l[1],l[2],l[3],l[4],l[5],l[6]},  # 8
+        {l[0],l[1],l[2],l[3],     l[5],l[6]},  # 9
     ]
 
     res = ""
@@ -271,7 +275,7 @@ def get_number(number, size, *, fg=DEFAULT_CHARACTER):
     for digit in str(number): 
         feqs = numbers[int(digit)]
         
-        s_digit = make_shape(x, y, feqs, [], fg=fg)
+        s_digit = make_shape(x, y, feqs, [], fg=fg, bg=bg)
         if res:
             new_res = ""
             for i,j in zip(res.split("\n"),s_digit.split("\n")):
@@ -282,3 +286,37 @@ def get_number(number, size, *, fg=DEFAULT_CHARACTER):
             res = s_digit
 
     return res
+
+
+def get_lines(width, height, lines, *, fg=DEFAULT_FGCHARACTER, bg=DEFAULT_BGCHARACTER):
+    """Creates a custom shape of lines.
+
+    Positional arguments:
+        width  - width of the shape.
+        height - height of the shape.
+        lines  - an array of tuples, each tuple (x, y).
+        
+    Keyword arguments:
+        fg - foreground character.
+        bg - background character.
+
+    Lines system:
+        The (x, y) of the start of the current line is the last (x, y),
+        and the end of the current line is the current (x, y).
+
+        The start of the first line is the first (x, y) of the lines array.
+    """
+
+    start_x, start_y = lines[0]
+    x, y = start_x-1, start_y-1
+    
+    points = []
+    for line_x, line_y in lines[1:]:
+        while line_x != x or line_y != y:
+            if line_x != x:
+                x += 1 if line_x > x else -1
+            if line_y != y:
+                y += 1 if line_y > y else -1
+            points.append((x, y))
+
+    return get_points(width, height, points, fg=fg, bg=bg)

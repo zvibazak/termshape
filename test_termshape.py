@@ -109,7 +109,7 @@ def test_get_points():
 """)
 
 def test_get_numbers():
-	string0 = get_number(0,2)
+	string0 = get_numbers(0,2)
 	assert (string0 == """\
 * * *
 *   *
@@ -118,7 +118,7 @@ def test_get_numbers():
 * * *
 """)
 
-	string1 = get_number(1,2)
+	string1 = get_numbers(1,2)
 	assert (string1 == """\
     *
     *
@@ -127,7 +127,7 @@ def test_get_numbers():
     *
 """)
 
-	string2 = get_number(2,2)
+	string2 = get_numbers(2,2)
 	assert (string2 == """\
 * * *
     *
@@ -136,7 +136,7 @@ def test_get_numbers():
 * * *
 """)
 
-	string3 = get_number(3,2)
+	string3 = get_numbers(3,2)
 	assert (string3 == """\
 * * *
     *
@@ -145,7 +145,7 @@ def test_get_numbers():
 * * *
 """)
 
-	string4 = get_number(4,2)
+	string4 = get_numbers(4,2)
 	assert (string4 == """\
 *   *
 *   *
@@ -154,7 +154,7 @@ def test_get_numbers():
     *
 """)
 
-	string5 = get_number(5,2)
+	string5 = get_numbers(5,2)
 	assert (string5 == """\
 * * *
 *    
@@ -163,7 +163,7 @@ def test_get_numbers():
 * * *
 """)
 
-	string6 = get_number(6,2)
+	string6 = get_numbers(6,2)
 	assert (string6 == """\
 * * *
 *    
@@ -172,7 +172,7 @@ def test_get_numbers():
 * * *
 """)
 
-	string7 = get_number(7,2)
+	string7 = get_numbers(7,2)
 	assert (string7 == """\
 * * *
     *
@@ -181,7 +181,7 @@ def test_get_numbers():
     *
 """)
 
-	string8 = get_number(8,2)
+	string8 = get_numbers(8,2)
 	assert (string8 == """\
 * * *
 *   *
@@ -190,7 +190,7 @@ def test_get_numbers():
 * * *
 """)
 
-	string9 = get_number(9,2)
+	string9 = get_numbers(9,2)
 	assert (string9 == """\
 * * *
 *   *
@@ -199,7 +199,7 @@ def test_get_numbers():
 * * *
 """)
 
-	stringPI = get_number(31415926,3)
+	stringPI = get_numbers(31415926,3)
 	assert (stringPI == """\
 * * * *          *    *     *          *    * * * *    * * * *    * * * *    * * * *
       *          *    *     *          *    *          *     *          *    *      
@@ -208,4 +208,19 @@ def test_get_numbers():
       *          *          *          *          *          *    *          *     *
       *          *          *          *          *          *    *          *     *
 * * * *          *          *          *    * * * *    * * * *    * * * *    * * * *
+""")
+
+def test_get_lines():
+    string = get_lines(10, 10, [(0, 0), (9, 9), (0, 9), (9, 0), (0, 0)])
+    assert (string == """\
+* * * * * * * * * *
+  *             *  
+    *         *    
+      *     *      
+        * *        
+        * *        
+      *     *      
+    *         *    
+  *             *  
+* * * * * * * * * *
 """)
