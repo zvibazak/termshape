@@ -1,6 +1,7 @@
 [![PyPI version fury.io](https://badge.fury.io/py/termshape.svg)](https://pypi.org/project/termshape/)
 [![codecov](https://codecov.io/gh/zvibazak/termshape/branch/main/graph/badge.svg)](https://codecov.io/gh/zvibazak/termshape)
 ![Tests](https://github.com/zvibazak/termshape/workflows/Python%20application/badge.svg)
+[![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/zvibazak/termshape.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/zvibazak/termshape/context:python)
 
 # termshape
 Termshape is a minimalistic Python package, that only prints basic 
