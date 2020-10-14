@@ -13,6 +13,11 @@ __license__ = "MIT"
 DEFAULT_FGCHARACTER = '*'
 DEFAULT_BGCHARACTER = ' '
 
+#Importing a module using 'import *' may unintentionally pollute the global namespace
+#if the module does not define '__all__'
+__all__ = [ "get_circle", "get_lines", "get_numbers", "get_points", "get_rectangle",
+    "get_square", "get_triangular" ]
+
 def _validate_positive_params(*args):
     # Raises TypeError if ones arguments in args is not an integer.
 
@@ -21,7 +26,7 @@ def _validate_positive_params(*args):
             raise TypeError("Only positive integers are allowed")
 
 
-def plot(canvas):
+def _plot(canvas):
     """Plots a 2d canvas.
     
     Positional arguments:
@@ -34,7 +39,7 @@ def plot(canvas):
     return res
 
 
-def make_shape(list_x, list_y, feqs, beqs, *, fg=DEFAULT_FGCHARACTER, bg=DEFAULT_BGCHARACTER):
+def _make_shape(list_x, list_y, feqs, beqs, *, fg=DEFAULT_FGCHARACTER, bg=DEFAULT_BGCHARACTER):
     """Creates a shape using expressions lists for foreground character-
     s and background characters.
     
@@ -78,7 +83,7 @@ def make_shape(list_x, list_y, feqs, beqs, *, fg=DEFAULT_FGCHARACTER, bg=DEFAULT
                 if eval(eq):
                     canvas[index_y][index_x] = fg
 
-    return plot(canvas)
+    return _plot(canvas)
 
 
 def get_square(size, *, fg=DEFAULT_FGCHARACTER, bg=DEFAULT_BGCHARACTER):
@@ -129,7 +134,7 @@ def get_rectangle(width, height, *, fg=DEFAULT_FGCHARACTER, bg=DEFAULT_BGCHARACT
         f"y < {height-1}",
     ]
 
-    return make_shape(x, y, feqs, beqs, fg=fg, bg=bg)
+    return _make_shape(x, y, feqs, beqs, fg=fg, bg=bg)
 
 
 def get_triangular(height, *, fg=DEFAULT_FGCHARACTER, bg=DEFAULT_BGCHARACTER):
@@ -159,7 +164,7 @@ def get_triangular(height, *, fg=DEFAULT_FGCHARACTER, bg=DEFAULT_BGCHARACTER):
         f"x < {height}-y-1",
     ]
 
-    return make_shape(x, y, feqs, beqs, fg=fg, bg=bg)
+    return _make_shape(x, y, feqs, beqs, fg=fg, bg=bg)
 
 
 def get_circle(radius, fpercent=5, *, fg=DEFAULT_FGCHARACTER, bg=DEFAULT_BGCHARACTER):
@@ -192,7 +197,7 @@ def get_circle(radius, fpercent=5, *, fg=DEFAULT_FGCHARACTER, bg=DEFAULT_BGCHARA
         f"x**2 + y**2 < {radius**2 - fpercent * (radius**2)}"
     ]
 
-    return make_shape(x, y, feqs, beqs, fg=fg, bg=bg)
+    return _make_shape(x, y, feqs, beqs, fg=fg, bg=bg)
 
 
 def get_points(width, height, points, *, fg=DEFAULT_FGCHARACTER, bg=DEFAULT_BGCHARACTER):
@@ -223,7 +228,7 @@ def get_points(width, height, points, *, fg=DEFAULT_FGCHARACTER, bg=DEFAULT_BGCH
         f"(x, y) not in {points}"
     ]
 
-    return make_shape(x, y, feqs, beqs, fg=fg, bg=bg)
+    return _make_shape(x, y, feqs, beqs, fg=fg, bg=bg)
 
 
 def get_numbers(number, size, *, fg=DEFAULT_FGCHARACTER, bg=DEFAULT_BGCHARACTER):
@@ -275,7 +280,7 @@ def get_numbers(number, size, *, fg=DEFAULT_FGCHARACTER, bg=DEFAULT_BGCHARACTER)
     for digit in str(number): 
         feqs = numbers[int(digit)]
         
-        s_digit = make_shape(x, y, feqs, [], fg=fg, bg=bg)
+        s_digit = _make_shape(x, y, feqs, [], fg=fg, bg=bg)
         if res:
             new_res = ""
             for i,j in zip(res.split("\n"),s_digit.split("\n")):
