@@ -161,8 +161,8 @@ print(get_points(10, 10, points_array, bg='.'))
 
 * Print numbers:
 ```python
-from termshape import get_number
-print(get_number(31415926,3))
+from termshape import get_numbers
+print(get_numbers(31415926,3))
 ```
 ```
 * * * *          *    *     *          *    * * * *    * * * *    * * * *    * * * *
