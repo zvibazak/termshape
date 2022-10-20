@@ -24,7 +24,7 @@ The ```get_*``` functions has (x,y) range and some equations, and from them it p
 ### Example:
 ```python
 from termshape import get_square
-print(get_square(5, 5))
+print(get_square(5))
 ```
 so: 
 `x-range` is between 0 and 4
