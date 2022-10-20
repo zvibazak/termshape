@@ -4,7 +4,7 @@
 [![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/zvibazak/termshape.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/zvibazak/termshape/context:python)
 
 # termshape
-Termshape is a minimalistic Python package, that only prints basic 
+Termshape is a minimalistic Python package, that prints basic 
 shapes on terminal. 
 It does not have any dependencies.
 
